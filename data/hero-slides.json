@@ -1,0 +1,356 @@
+{
+ "uz": [
+  {
+   "g": [
+    "Eksport",
+    "Texnika"
+   ],
+   "h": [
+    [
+     17,
+     89,
+     "Ekskavatorlar",
+     "Turli o‘lchamdagi ekskavator va maxsus texnika."
+    ],
+    [
+     35,
+     29,
+     "Tekshiruv",
+     "Jo‘natishdan oldin texnik holati ko‘zdan kechiriladi."
+    ],
+    [
+     70,
+     50,
+     "Hujjatlar",
+     "Eksport hujjatlari va bojxona rasmiylashtiruvi."
+    ],
+    [
+     92,
+     86,
+     "Yetkazish",
+     "Texnika xaridorga yetkazib beriladi."
+    ]
+   ]
+  },
+  {
+   "g": [
+    "Kortex",
+    "Oil"
+   ],
+   "h": [
+    [
+     70,
+     25,
+     "Kortex Oil",
+     "Avtomobillar va maxsus texnika uchun yuqori sifatli motor moylari."
+    ],
+    [
+     33,
+     30,
+     "World Oil Korea",
+     "2025-yil 6-martda World Oil Korea Co., LTD bilan shartnoma imzolangan."
+    ],
+    [
+     88,
+     84,
+     "Birinchi konteyner",
+     "Motor moyi yuklangan dastlabki konteyner 21-may kuni Janubiy Koreyadan jo‘natildi."
+    ]
+   ]
+  },
+  {
+   "g": [
+    "RT",
+    "Logistics"
+   ],
+   "h": [
+    [
+     48,
+     40,
+     "RT Logistics",
+     "Har xil hajmdagi yuklarni konteynerlarda tashish."
+    ],
+    [
+     10,
+     82,
+     "Dengiz yo‘li",
+     "Koreya portlaridan dunyo bo‘ylab."
+    ],
+    [
+     84,
+     66,
+     "186+ davlat",
+     "Yuk va tovarlar yetkaziladigan davlatlar."
+    ]
+   ]
+  },
+  {
+   "g": [
+    "Dream",
+    "Express"
+   ],
+   "h": [
+    [
+     20,
+     39,
+     "Dream Express",
+     "Janubiy Koreyadan O‘zbekistonga konteyner kargo xizmati."
+    ],
+    [
+     47,
+     34,
+     "Eshikdan-eshikkacha",
+     "Yukni Koreyadagi manzildan olib, O‘zbekistondagi manzilgacha yetkazamiz."
+    ],
+    [
+     31,
+     86,
+     "2023-yildan beri",
+     "2023-yil 17-martda Janubiy Koreyada faoliyat boshlagan."
+    ],
+    [
+     90,
+     65,
+     "Birinchilardan",
+     "O‘zbek vatandoshlarimiz uchun eshikdan-eshikkacha xizmatni ilk bor yo‘lga qo‘ygan."
+    ]
+   ]
+  }
+ ],
+ "ru": [
+  {
+   "g": [
+    "Экспорт",
+    "Техника"
+   ],
+   "h": [
+    [
+     17,
+     89,
+     "Экскаваторы",
+     "Экскаваторы и спецтехника разных классов."
+    ],
+    [
+     35,
+     29,
+     "Проверка",
+     "Перед отправкой проверяется техническое состояние."
+    ],
+    [
+     70,
+     50,
+     "Документы",
+     "Экспортные документы и таможенное оформление."
+    ],
+    [
+     92,
+     86,
+     "Доставка",
+     "Техника доставляется покупателю."
+    ]
+   ]
+  },
+  {
+   "g": [
+    "Kortex",
+    "Oil"
+   ],
+   "h": [
+    [
+     70,
+     25,
+     "Kortex Oil",
+     "Высококачественные моторные масла для автомобилей и спецтехники."
+    ],
+    [
+     33,
+     30,
+     "World Oil Korea",
+     "6 марта 2025 года подписан договор с World Oil Korea Co., LTD."
+    ],
+    [
+     88,
+     84,
+     "Первый контейнер",
+     "Первый контейнер с моторным маслом отправлен из Южной Кореи 21 мая."
+    ]
+   ]
+  },
+  {
+   "g": [
+    "RT",
+    "Logistics"
+   ],
+   "h": [
+    [
+     48,
+     40,
+     "RT Logistics",
+     "Перевозка грузов любого объёма в контейнерах."
+    ],
+    [
+     10,
+     82,
+     "Морской путь",
+     "Из портов Кореи по всему миру."
+    ],
+    [
+     84,
+     66,
+     "186+ стран",
+     "Страны, куда доставляем грузы и товары."
+    ]
+   ]
+  },
+  {
+   "g": [
+    "Dream",
+    "Express"
+   ],
+   "h": [
+    [
+     20,
+     39,
+     "Dream Express",
+     "Контейнерное карго из Южной Кореи в Узбекистан."
+    ],
+    [
+     47,
+     34,
+     "От двери до двери",
+     "Забираем груз с адреса в Корее и доставляем до адреса в Узбекистане."
+    ],
+    [
+     31,
+     86,
+     "С 2023 года",
+     "Работает в Южной Корее с 17 марта 2023 года."
+    ],
+    [
+     90,
+     65,
+     "Первыми",
+     "Первыми запустили доставку «от двери до двери» для узбекских соотечественников."
+    ]
+   ]
+  }
+ ],
+ "en": [
+  {
+   "g": [
+    "Export",
+    "Machinery"
+   ],
+   "h": [
+    [
+     17,
+     89,
+     "Excavators",
+     "Excavators and special machinery of different sizes."
+    ],
+    [
+     35,
+     29,
+     "Inspection",
+     "Each machine’s condition is checked before shipping."
+    ],
+    [
+     70,
+     50,
+     "Documents",
+     "Export paperwork and customs clearance."
+    ],
+    [
+     92,
+     86,
+     "Delivery",
+     "Machinery is delivered to the buyer."
+    ]
+   ]
+  },
+  {
+   "g": [
+    "Kortex",
+    "Oil"
+   ],
+   "h": [
+    [
+     70,
+     25,
+     "Kortex Oil",
+     "High-quality motor oils for cars and special machinery."
+    ],
+    [
+     33,
+     30,
+     "World Oil Korea",
+     "Contract signed with World Oil Korea Co., LTD on 6 March 2025."
+    ],
+    [
+     88,
+     84,
+     "First container",
+     "The first container of motor oil left South Korea on 21 May."
+    ]
+   ]
+  },
+  {
+   "g": [
+    "RT",
+    "Logistics"
+   ],
+   "h": [
+    [
+     48,
+     40,
+     "RT Logistics",
+     "Shipping cargo of any size in containers."
+    ],
+    [
+     10,
+     82,
+     "Sea routes",
+     "From Korean ports to the world."
+    ],
+    [
+     84,
+     66,
+     "186+ countries",
+     "Countries we deliver cargo and goods to."
+    ]
+   ]
+  },
+  {
+   "g": [
+    "Dream",
+    "Express"
+   ],
+   "h": [
+    [
+     20,
+     39,
+     "Dream Express",
+     "Container cargo from South Korea to Uzbekistan."
+    ],
+    [
+     47,
+     34,
+     "Door to door",
+     "We collect from an address in Korea and deliver to an address in Uzbekistan."
+    ],
+    [
+     31,
+     86,
+     "Since 2023",
+     "Operating in South Korea since 17 March 2023."
+    ],
+    [
+     90,
+     65,
+     "The first",
+     "First to launch door-to-door delivery for Uzbek nationals."
+    ]
+   ]
+  }
+ ]
+}

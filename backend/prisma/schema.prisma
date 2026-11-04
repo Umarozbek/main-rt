@@ -1,0 +1,117 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String
+  role      Role     @default(ADMIN)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum Role {
+  SUPER_ADMIN
+  ADMIN
+}
+
+model Contact {
+  id        String        @id @default(cuid())
+  name      String
+  phone     String
+  service   String?
+  message   String?
+  status    ContactStatus @default(NEW)
+  note      String?
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+}
+
+enum ContactStatus {
+  NEW
+  IN_PROGRESS
+  DONE
+  ARCHIVED
+}
+
+model FleetItem {
+  id        String   @id @default(cuid())
+  brand     String
+  model     String
+  type      String   @default("G'ildirakli ekskavator")
+  imageUrl  String?
+  weight    String?
+  power     String?
+  bucket    String?
+  digDepth  String?
+  year      String?
+  hours     String?
+  price     String?
+  sortOrder Int      @default(0)
+  visible   Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model NewsArticle {
+  id          String   @id @default(cuid())
+  titleUz     String
+  titleRu     String   @default("")
+  titleEn     String   @default("")
+  bodyUz      String
+  bodyRu      String   @default("")
+  bodyEn      String   @default("")
+  imageUrl    String?
+  company     String?
+  location    String?
+  publishDate DateTime @default(now())
+  visible     Boolean  @default(true)
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Company {
+  id          String  @id @default(cuid())
+  slug        String  @unique
+  nameUz      String
+  nameRu      String  @default("")
+  nameEn      String  @default("")
+  descUz      String
+  descRu      String  @default("")
+  descEn      String  @default("")
+  category    String?
+  logoUrl     String?
+  website     String?
+  instagram   String?
+  telegram    String?
+  email       String?
+  phone       String?
+  sortOrder   Int     @default(0)
+  visible     Boolean @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Translation {
+  id    String @id @default(cuid())
+  key   String
+  lang  String @default("uz")
+  value String
+
+  @@unique([key, lang])
+  @@index([lang])
+}
+
+model SiteSetting {
+  id    String @id @default(cuid())
+  key   String @unique
+  value String
+}
