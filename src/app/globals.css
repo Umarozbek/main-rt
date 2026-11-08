@@ -290,10 +290,10 @@ body.menu-open{overflow:hidden}
 .co-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .co{cursor:pointer;border-radius:20px;overflow:hidden;background:var(--white);border:1.5px solid var(--rule);transition:transform .4s var(--ease),box-shadow .4s var(--ease)}
 .co:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(31,22,18,.12)}
-.co-logo-area{aspect-ratio:3/2;display:flex;align-items:center;justify-content:center;background:#fff;padding:20px;border-bottom:1.5px solid var(--rule)}
-.co-logo-area img{max-width:80%;max-height:80%;object-fit:contain;transition:transform .5s var(--ease)}
-.co:hover .co-logo-area img{transform:scale(1.06)}
-.co-card-body{padding:18px 20px 22px;display:flex;flex-direction:column;gap:8px}
+.co-logo-area{display:flex;align-items:center;justify-content:center;padding:20px 20px 0}
+.co-logo-area img{width:110px;height:110px;object-fit:contain;border-radius:50%;border:2px solid var(--rule);box-shadow:0 4px 12px rgba(31,22,18,.08);background:#fff;padding:10px;transition:transform .5s var(--ease)}
+.co:hover .co-logo-area img{transform:scale(1.08)}
+.co-card-body{padding:14px 20px 22px;display:flex;flex-direction:column;gap:8px}
 .co-card-body .co-cat{display:inline-block;font-size:11px;font-weight:600;border-radius:999px;padding:4px 12px;background:var(--ground);color:var(--navy);width:fit-content}
 .co-card-body h3{font-size:20px;font-weight:700;color:var(--navy);margin:0}
 .co-card-desc{font-size:14px;line-height:1.6;color:var(--muted);margin:0;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}

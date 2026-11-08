@@ -972,7 +972,7 @@ export default function ClientPage() {
             <div className="co-grid">
               {([
                 { id:'kortex', name:'Kortex Oil', cat:'catOil', desc:'coKo', logo:'kortex-oil-logo.png', imgs:['kortex-1','kortex-2','koretex-3'] },
-                { id:'dream', name:'Dream Express', cat:'catLog', desc:'coDr', logo:'dream-express-truck.jpg', imgs:['dream-image-1','dream-image-2','dream-image-3'] },
+                { id:'dream', name:'Dream Express', cat:'catLog', desc:'coDr', logo:'dream-express-logo.jpg', imgs:['dream-image-1','dream-image-2','dream-image-3'] },
                 { id:'motors', name:'RT Motors', cat:'catAuto', desc:'coMo', logo:'rt-motors-logo.png', imgs:['motor-1','motor-2','motor-3'] },
                 { id:'medline', name:'RT Medline', cat:'catMed', desc:'coMe', logo:'rt-medline-logo.jpg', imgs:['rt-med-1','rt-med-2','rt-med-3'] },
                 { id:'aka', name:'aka taxi', cat:'catMob', desc:'coTaxi', logo:'aka-taxi-logo.png', imgs:['aka-taxi-1','aka-taxi-2','aka-taxi-3'] },
