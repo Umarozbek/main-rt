@@ -1,0 +1,13 @@
+node_modules
+.next
+.git
+.github
+*.md
+tests
+out
+backend/dist
+backend/node_modules
+admin/node_modules
+admin/.next
+client
+reference
