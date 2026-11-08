@@ -243,5 +243,9 @@
  "w4": "Turkey",
  "w5": "Europe",
  "w6": "Americas",
- "w7": "Southeast Asia"
+ "w7": "Southeast Asia",
+ "bw1": "IMPORT",
+ "bw2": "EXPORT",
+ "bw3": "LOGISTICS",
+ "bw4": "MOBILITY"
 }

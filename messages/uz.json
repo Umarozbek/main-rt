@@ -170,5 +170,9 @@
  "w4": "Turkiya",
  "w5": "Yevropa",
  "w6": "Amerika",
- "w7": "Janubi-Sharqiy Osiyo"
+ "w7": "Janubi-Sharqiy Osiyo",
+ "bw1": "IMPORT",
+ "bw2": "EKSPORT",
+ "bw3": "LOGISTIKA",
+ "bw4": "MOBILLIK"
 }

@@ -8,7 +8,7 @@ const ARROW = <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke
 const IG = <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
 
 const BRANDS = ['rt-logo.png','dream.jpg','rtmotors.png','medline.jpg','akataxi.jpg','ic-ship.webp']
-const BAND_WORDS = ['IMPORT','EKSPORT','LOGISTIKA','MOBILLIK']
+const BAND_KEYS = ['bw1','bw2','bw3','bw4']
 
 const LAND_D = "M132.8 3.7h0M140.0 3.7h0M147.2 3.7h0M197.8 3.7h0M212.2 3.7h0M320.6 3.7h0M327.8 3.7h0M335.0 3.7h0M342.2 3.7h0M349.4 3.7h0M356.7 3.7h0M363.9 3.7h0M371.1 3.7h0M378.3 3.7h0M385.6 3.7h0M392.8 3.7h0M400.0 3.7h0M407.2 3.7h0M623.9 3.7h0M631.1 3.7h0M717.8 3.7h0M725.0 3.7h0M732.2 3.7h0M739.4 3.7h0M746.7 3.7h0M753.9 3.7h0M761.1 3.7h0M768.3 3.7h0M862.2 3.7h0M132.8 13.2h0M154.4 13.2h0M161.7 13.2h0M168.9 13.2h0M176.1 13.2h0M197.8 13.2h0M212.2 13.2h0M226.7 13.2h0M233.9 13.2h0M241.1 13.2h0M248.3 13.2h0M255.6 13.2h0M262.8 13.2h0M270.0 13.2h0M320.6 13.2h0M327.8 13.2h0M335.0 13.2h0M342.2 13.2h0M349.4 13.2h0M356.7 13.2h0M363.9 13.2h0M371.1 13.2h0M378.3 13.2h0M385.6 13.2h0M392.8 13.2h0M400.0 13.2h0M407.2 13.2h0M623.9 13.2h0M660.0 13.2h0M667.2 13.2h0M688.9 13.2h0M696.1 13.2h0M710.6 13.2h0M717.8 13.2h0M725.0 13.2h0M732.2 13.2h0M739.4 13.2h0M746.7 13.2h0M753.9 13.2h0M761.1 13.2h0M768.3 13.2h0M775.6 13.2h0M782.8 13.2h0M790.0 13.2h0M797.2 13.2h0M804.4 13.2h0M811.7 13.2h0M818.9 13.2h0M826.1 13.2h0M840.6 13.2h0M847.8 13.2h0M862.2 13.2h0M869.4 13.2h0M876.7 13.2h0M883.9 13.2h0M891.1 13.2h0M977.8 13.2h0"
 
@@ -25,6 +25,8 @@ const DST: [number,number][] = [[664.4,123.6],[576.7,70.4],[625.8,182.2],[552.8,
 
 export default function ClientPage() {
   const { lang, setLang, t } = useLang()
+  const tRef = useRef(t)
+  useEffect(() => { tRef.current = t }, [t])
   const [menuOpen, setMenuOpen] = useState(false)
   const [specOpen, setSpecOpen] = useState(false)
   const [specModel, setSpecModel] = useState('')
@@ -223,11 +225,12 @@ export default function ClientPage() {
       // Update giant headline from hero data
       const gl1 = document.getElementById('gl1')
       const gl2 = document.getElementById('gl2')
+      const tr = tRef.current
       const heroSlideData = [
-        [t('r1'), t('r1s')],
-        [t('r2'), t('r2s')],
-        [t('r3'), t('r3s')],
-        [t('r4'), t('r4s')],
+        [tr('r1'), tr('r1s')],
+        [tr('r2'), tr('r2s')],
+        [tr('r3'), tr('r3s')],
+        [tr('r4'), tr('r4s')],
       ]
       if (gl1 && gl2 && heroSlideData[s]) {
         gl1.textContent = heroSlideData[s][0]
@@ -612,6 +615,31 @@ export default function ClientPage() {
     }
   }, [])
 
+  useEffect(() => {
+    const gl1 = document.getElementById('gl1')
+    const gl2 = document.getElementById('gl2')
+    if (gl1 && gl2) {
+      const slides = [
+        [t('r1'), t('r1s')],
+        [t('r2'), t('r2s')],
+        [t('r3'), t('r3s')],
+        [t('r4'), t('r4s')],
+      ]
+      const active = document.querySelector<HTMLElement>('.rbtn[aria-selected="true"]')
+      const s = active ? Number(active.dataset.s) : 0
+      gl1.innerHTML = slides[s]?.[0] ?? ''
+      gl2.textContent = slides[s]?.[1] ?? ''
+    }
+    document.querySelectorAll<HTMLElement>('.rbtn').forEach(btn => {
+      const rt = btn.querySelector('.rt')
+      const rs = btn.querySelector('.rs')
+      const s = Number(btn.dataset.s)
+      const keys = [['r1','r1s'],['r2','r2s'],['r3','r3s'],['r4','r4s']]
+      if (rt && keys[s]) rt.innerHTML = t(keys[s][0])
+      if (rs && keys[s]) rs.innerHTML = t(keys[s][1])
+    })
+  }, [lang, t])
+
   const langs: Lang[] = ['uz','ru','en']
 
   const marqTrack = [...BRANDS, ...BRANDS, ...BRANDS].map((src, i) => (
@@ -621,8 +649,8 @@ export default function ClientPage() {
   const bandRow = (outline: boolean) => {
     const items = []
     for (let i = 0; i < 8; i++) {
-      for (const w of BAND_WORDS) {
-        items.push(<span key={`${i}-${w}`}>{w}</span>)
+      for (const k of BAND_KEYS) {
+        items.push(<span key={`${i}-${k}`}>{t(k)}</span>)
       }
     }
     return <div className={`band-row${outline ? ' o' : ''}`}>{items}</div>
