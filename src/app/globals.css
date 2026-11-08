@@ -235,7 +235,7 @@ body.menu-open{overflow:hidden}
 .marq{flex:1;overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
 .marq-track{display:flex;align-items:center;gap:56px;width:max-content;animation:mar 34s linear infinite}
 .marq:hover .marq-track{animation-play-state:paused}
-.marq-track img{height:52px;width:auto;filter:grayscale(1);opacity:.75;transition:filter .3s,opacity .3s}
+.marq-track img{height:72px;width:auto;filter:grayscale(1);opacity:.75;transition:filter .3s,opacity .3s}
 .marq-track img:hover{filter:none;opacity:1}
 .marq-track img.wide{height:34px}
 @keyframes mar{to{transform:translateX(-50%)}}
