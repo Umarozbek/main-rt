@@ -45,6 +45,7 @@
     "@types/node": "^26.6.5",
     "@types/passport-jwt": "^4.0.1",
     "@types/pg": "^8.23.1",
+    "dotenv": "^18.0.9",
     "prisma": "^7.10.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
