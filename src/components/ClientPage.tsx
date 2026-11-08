@@ -29,7 +29,7 @@ export default function ClientPage() {
   const [specOpen, setSpecOpen] = useState(false)
   const [specModel, setSpecModel] = useState('')
   const [specSlide, setSpecSlide] = useState(0)
-  const [expandedCo, setExpandedCo] = useState<string|null>('kortex')
+  const [expandedCo, setExpandedCo] = useState<string|null>(null)
   const specRef = useRef<HTMLDialogElement>(null)
   const [formNote, setFormNote] = useState('')
 
