@@ -41,8 +41,7 @@ export default function AdminShell({ children, title }: { children: React.ReactN
     <div className={s.adminWrap}>
       <aside className={s.sidebar}>
         <div className={s.sidebarBrand}>
-          <img src="/img/rt-logo-white.png" alt="RT Holdings" />
-          <span>CMS</span>
+          <span>RT Holdings CMS</span>
         </div>
         <nav className={s.sidebarNav}>
           {NAV.map(item => (

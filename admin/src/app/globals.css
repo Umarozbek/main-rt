@@ -1,2 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700&family=Onest:wght@400;500;600&display=swap');
+
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: system-ui, -apple-system, sans-serif; }
+
+:root {
+  --navy: #3A2A22;
+  --navy-2: #2E211B;
+  --navy-3: #1F1612;
+  --orange: #C9A26B;
+  --amber: #E6CB98;
+  --orange-ink: #86592E;
+  --ground: #F6F1E8;
+  --white: #FFFDF9;
+  --ink: #2A1F1A;
+  --muted: #6E5E52;
+  --rule: #E6DCCD;
+  --on-navy: #F3EADF;
+  --on-navy-muted: #CDBBA7;
+  --f-display: 'Unbounded', system-ui, sans-serif;
+  --f-body: 'Onest', system-ui, sans-serif;
+}
+
+body {
+  font-family: var(--f-body);
+  background: var(--ground);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}

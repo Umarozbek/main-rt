@@ -835,7 +835,9 @@ export default function ClientPage() {
                 </div>
               </article>
               <article className="tcard rv" style={{ ['--d' as string]: '.1s' }}>
-                <div className="tvis photo wipe"><img src="/img/companies/kortex-1.jpg" alt="Kortex Oil" width={1376} height={768} loading="lazy" /></div>
+                <div className="tvis photo wipe">
+                  <img src="/img/companies/kortex-products.jpg" alt="Kortex Oil" width={1376} height={768} loading="lazy" />
+                </div>
                 <div className="tbody">
                   <span className="cat" dangerouslySetInnerHTML={{ __html: t('r2') }} />
                   <h3 dangerouslySetInnerHTML={{ __html: t('trImH') }} />

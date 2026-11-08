@@ -68,7 +68,7 @@ p{margin:0}
 .logo{position:relative;display:block}
 .logo img{height:42px;width:auto;transition:opacity .3s}
 .logo .lg-light{position:absolute;inset:0;opacity:0}
-.hdr.solid .lg-dark,.menu-open .lg-dark{opacity:0}.hdr.solid .lg-light,.menu-open .lg-light{opacity:1}
+.menu-open .lg-dark{opacity:0}.menu-open .lg-light{opacity:1}
 .hdr.solid .burger{color:var(--on-navy)}
 .hright{display:flex;align-items:center;gap:6px 20px;flex-wrap:wrap;justify-content:flex-end}
 .ilink{display:inline-flex;align-items:center;gap:7px;min-height:44px;text-decoration:none;font:400 14px "Raleway",var(--f-body);color:var(--ink);transition:color .3s}
@@ -218,7 +218,7 @@ body.menu-open{overflow:hidden}
 .trade{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px}
 .tcard{background:var(--white);border-radius:24px;overflow:hidden;display:flex;flex-direction:column;transition:transform .5s var(--ease),box-shadow .5s var(--ease)}
 .tcard:hover{transform:translateY(-8px);box-shadow:0 26px 50px rgba(31,22,18,.12)}
-.tvis{height:340px;background:var(--ground);display:grid;place-items:center;overflow:hidden;position:relative}
+.tvis{height:480px;background:var(--ground);display:grid;place-items:center;overflow:hidden;position:relative}
 .tvis img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:contain;object-position:center bottom;padding:24px 28px 18px;box-sizing:border-box;transition:transform 1s var(--ease)}
 .tvis.photo img{position:absolute;inset:0;width:100%;height:100%;padding:0;object-fit:cover;object-position:center center}
 .tcard:hover .tvis img{transform:scale(1.05)}
