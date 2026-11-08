@@ -177,7 +177,7 @@ function ImageCard({ img }: { img: ImageEntry }) {
           borderLeft: `3px solid ${color}`,
         }}>
           <div style={{ fontSize: 11, fontWeight: 700, color: color, marginBottom: 2, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-            Saytda qayerda ko'rinadi
+            Saytda qayerda ko&apos;rinadi
           </div>
           <div style={{ fontSize: 13, color: 'var(--ink)', lineHeight: 1.5 }}>
             {img.where}
@@ -192,7 +192,7 @@ function ImageCard({ img }: { img: ImageEntry }) {
             Tavsiyalar
           </div>
           <div style={{ fontSize: 13, color: 'var(--ink)', lineHeight: 1.5 }}>
-            <b>O'lcham:</b> {img.size}<br />
+            <b>O&apos;lcham:</b> {img.size}<br />
             {img.tip}
           </div>
         </div>
@@ -276,7 +276,7 @@ export default function ImagesPage() {
         <div>
           <b>Demo rejim:</b> Yuklangan rasmlar brauzer xotirasida saqlanadi (localStorage).
           Haqiqiy serverga ulangandan keyin rasmlar <code>/public/img/</code> papkasiga saqlanadi.
-          Har bir rasmning o'lchami va formati tavsiyasiga amal qiling.
+          Har bir rasmning o&apos;lchami va formati tavsiyasiga amal qiling.
         </div>
       </div>
 

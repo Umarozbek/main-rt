@@ -832,7 +832,7 @@ export default function SectionsPage() {
                         letterSpacing: '0.06em', margin: '0 0 10px', display: 'flex', alignItems: 'center', gap: 6,
                       }}>
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={sec.color} strokeWidth="2"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5" /></svg>
-                        Kompaniya ma'lumotlari ({sectionCompanies.length})
+                        Kompaniya ma&apos;lumotlari ({sectionCompanies.length})
                       </h4>
                       <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
                         {sectionCompanies.map(co => (
