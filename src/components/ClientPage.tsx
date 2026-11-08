@@ -1304,7 +1304,7 @@ export default function ClientPage() {
       {/* FOOTER */}
       <footer>
         <div className="wrap foot-top">
-          <div className="brand"><img src="/img/rt-logo-white.png" alt="RT Holdings" width={720} height={296} loading="lazy" /></div>
+          <div className="brand"><img src="/img/rt-logo.png" alt="RT Holdings" width={720} height={296} loading="lazy" /></div>
           <div className="fcols">
             <div className="fcol"><h4 dangerouslySetInnerHTML={{ __html: t('nCos') }} /><a href="#trade">Kortex Oil</a><a href="#cargo">Dream Express</a><a href="#companies">RT Motors</a><a href="#companies">RT Medline</a><a href="#aka">aka taxi</a></div>
             <div className="fcol"><h4 dangerouslySetInnerHTML={{ __html: t('ftNav') }} /><a href="#about" dangerouslySetInnerHTML={{ __html: t('nAbout') }} /><a href="#news" dangerouslySetInnerHTML={{ __html: t('nNews') }} /><a href="#contact" dangerouslySetInnerHTML={{ __html: t('nContact') }} /></div>
