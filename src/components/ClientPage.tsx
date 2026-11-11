@@ -222,6 +222,9 @@ export default function ClientPage() {
       if (hxEl) {
         hxEl.className = `hx${s === 0 ? ' on-ex' : ''}`
       }
+      if (stEl) {
+        stEl.className = `stage s${s}`
+      }
       // Update giant headline from hero data
       const gl1 = document.getElementById('gl1')
       const gl2 = document.getElementById('gl2')
@@ -378,9 +381,9 @@ export default function ClientPage() {
     }
 
     // Smoke & dust particles
-    const EXH: Record<number, number[][]> = { 0: [], 1: [[29, 2]], 2: [[78, 4]], 3: [[53, 1], [71, 3]] }
+    const EXH: Record<number, number[][]> = { 0: [], 2: [[78, 4]], 3: [[53, 1], [71, 3]] }
     const WAKE: Record<number, number[][]> = { 2: [[7, 86], [12, 90]] }
-    const TIRE: Record<number, number[][]> = { 0: [[45, 97], [70, 97], [92, 97]], 1: [[22, 95], [57, 95], [88, 95]], 3: [[9, 94], [39, 94], [70, 94]] }
+    const TIRE: Record<number, number[][]> = { 0: [[45, 97], [70, 97], [92, 97]], 3: [[9, 94], [39, 94], [70, 94]] }
     const emit = (i: number, heavy: boolean) => {
       const sl = slides[i]; if (!sl) return
       const vis = sl.querySelector('.vis') as HTMLElement; if (!vis) return
@@ -435,7 +438,7 @@ export default function ClientPage() {
     // Brake dust on slide change
     const sp = document.getElementById('sparks') as HTMLElement
     const spawnDust = () => {
-      if (reduce || !sp) return
+      if (reduce || !sp || curSlide === 1) return
       sp.innerHTML = ''
       setTimeout(() => {
         for (let k = 0; k < 14; k++) {
@@ -761,10 +764,9 @@ export default function ClientPage() {
                 </div>
               </div>
               <div className="slide" data-s="1" style={{ ['--dir' as string]: 1 }}>
-                <div className="vis vis-tank">
-                  <span className="shadow" aria-hidden="true" />
-                  <span className="mbadge kbadge"><i className="kdrop" aria-hidden="true" /><b>KORTEX</b> OIL</span>
-                  <img src="/img/tanker.webp" alt="Yoqilg'i tankeri" width={1073} height={410} />
+                <div className="vis vis-tank vis-oils">
+                  <img className="kortex-logo-hero" src="/img/companies/kortex-oil-logo.png" alt="Kortex Oil" width={200} height={120} />
+                  <img className="oils-hero" src="/img/kortex-oils-hero.png" alt="Kortex Oil products" width={1073} height={410} />
                 </div>
               </div>
               <div className="slide" data-s="2" style={{ ['--dir' as string]: 1 }}>

@@ -473,7 +473,12 @@ footer{background:var(--navy-3);color:var(--on-navy)}
 .vis-tank img{width:100%;height:auto;position:relative;filter:drop-shadow(0 26px 26px rgba(31,22,18,.2))}
 .vis-tank .shadow{position:absolute;left:3%;right:3%;bottom:-3%;height:12%;border-radius:50%;background:radial-gradient(closest-side,rgba(31,22,18,.35),transparent);filter:blur(4px)}
 .slide.on .vis-tank img{animation:idle 3.2s ease-in-out infinite}
-.stage.s1 .road{opacity:.7;animation:roadmv .6s linear infinite}
+.slide.on .vis-oils img{animation:none}
+.vis-oils{display:flex;flex-direction:column;align-items:center;width:100%}
+.vis-oils .kortex-logo-hero{width:160px;height:auto;margin-bottom:12px;filter:none;animation:none !important}
+.vis-oils .oils-hero{width:100%;height:auto}
+.stage.s1 .road{opacity:0}
+.stage.s1 .smoke,.stage.s1 .dust,.stage.s1 #sparks{display:none !important}
 @media (max-width:900px){.vis-tank{width:100%}}
 .vis-ex{width:104%}
 .vis-ex img,.vis-ship img{width:100%;height:auto;position:relative;filter:drop-shadow(0 26px 26px rgba(31,22,18,.2))}
