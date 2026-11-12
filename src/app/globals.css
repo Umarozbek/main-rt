@@ -183,7 +183,7 @@ body.menu-open{overflow:hidden}
 .vis-truck{width:108%;margin-bottom:5%}
 .vis-truck img{width:100%;height:auto;position:relative;filter:drop-shadow(0 30px 30px rgba(31,22,18,.18))}
 .vis-truck .shadow{position:absolute;left:8%;right:4%;bottom:-2%;height:9%;border-radius:50%;background:radial-gradient(closest-side,rgba(31,22,18,.35),transparent);filter:blur(4px)}
-.slide.on .vis-truck img{animation:idle 3.2s ease-in-out infinite}
+.slide.on .vis-truck img{animation:none}
 #exBoom{transform-box:view-box;transform-origin:334px 342px;animation:boom 5s ease-in-out infinite}
 #exArm{transform-box:view-box;transform-origin:200px 113px;animation:arm 5s ease-in-out infinite}
 #exBucket{transform-box:view-box;transform-origin:140px 312px;animation:bucket 5s ease-in-out infinite}
@@ -472,7 +472,7 @@ footer{background:var(--navy-3);color:var(--on-navy)}
 .vis-tank{width:122%;margin-bottom:6%}
 .vis-tank img{width:100%;height:auto;position:relative;filter:drop-shadow(0 26px 26px rgba(31,22,18,.2))}
 .vis-tank .shadow{position:absolute;left:3%;right:3%;bottom:-3%;height:12%;border-radius:50%;background:radial-gradient(closest-side,rgba(31,22,18,.35),transparent);filter:blur(4px)}
-.slide.on .vis-tank img{animation:idle 3.2s ease-in-out infinite}
+.slide.on .vis-tank img{animation:none}
 .slide.on .vis-oils img{animation:none}
 .vis-oils{display:flex;flex-direction:column;align-items:center;width:100%}
 .vis-oils .kortex-logo-hero{width:160px;height:auto;margin-bottom:12px;filter:none;animation:none !important}
@@ -486,10 +486,13 @@ footer{background:var(--navy-3);color:var(--on-navy)}
 .slide.on .vis-ex img{animation:exbob 4s ease-in-out infinite;transform-origin:70% 90%}
 @keyframes exbob{0%,100%{transform:rotate(0)}50%{transform:rotate(-.8deg) translateY(-2px)}}
 .vis-ship{width:120%;margin-bottom:8%}
-.slide.on .vis-ship img{animation:sway 6s ease-in-out infinite;transform-origin:50% 80%}
-@keyframes sway{0%,100%{transform:rotate(-.6deg) translateY(0)}50%{transform:rotate(.6deg) translateY(-6px)}}
+.vis-logistics{width:100%;display:flex;align-items:flex-end;justify-content:center;position:relative}
+.vis-logistics .shadow{display:none}
+.vis-logistics .log-ground{width:100%;height:auto;position:relative;filter:drop-shadow(0 20px 30px rgba(31,22,18,.18))}
+.slide.on .vis-ship img{animation:none}
+.slide.on .vis-logistics .log-ground{animation:none}
 .stage.s3 .waves{opacity:1}
-@media (max-width:900px){.vis-ex,.vis-ship{width:100%}.rlist{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media (max-width:900px){.vis-ex,.vis-ship{width:100%}.vis-logistics{width:100%}.rlist{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 
 .cargo-poster{min-height:320px}
 .cargo-poster .shine{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.22) 50%,transparent 65%);background-size:250% 100%;animation:shine 5s ease-in-out infinite}
@@ -604,6 +607,10 @@ footer{background:var(--navy-3);color:var(--on-navy)}
 @keyframes drivein{0%{opacity:1;transform:translateX(calc(var(--dir,1)*115vw))}82%{transform:translateX(calc(var(--dir,1)*-1.2%)) rotate(calc(var(--dir,1)*-.9deg))}92%{transform:translateX(calc(var(--dir,1)*.4%)) rotate(calc(var(--dir,1)*.3deg))}100%{opacity:1;transform:none}}
 @keyframes driveout{0%{opacity:1;transform:none}15%{transform:translateX(calc(var(--dir,1)*1.5%)) rotate(calc(var(--dir,1)*.6deg))}100%{opacity:1;transform:translateX(calc(var(--dir,1)*-120vw))}}
 .slide.on .shadow{animation:none}
+.slide[data-s="1"].on,.slide[data-s="2"].on,.slide[data-s="3"].on{animation:fadein .7s var(--ease) both}
+.slide[data-s="1"].out,.slide[data-s="2"].out,.slide[data-s="3"].out{animation:fadeout .5s var(--ease) both}
+@keyframes fadein{0%{opacity:0}100%{opacity:1}}
+@keyframes fadeout{0%{opacity:1}100%{opacity:0}}
 .stage.driving .slide.on .vis img{animation:rumble .12s linear infinite}
 @keyframes rumble{0%,100%{transform:translateY(0)}50%{transform:translateY(-1.5px)}}
 .stage.driving .road{opacity:.75;animation:roadmv .35s linear infinite}

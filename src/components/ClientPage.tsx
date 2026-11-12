@@ -10,18 +10,6 @@ const IG = <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="c
 const BRANDS = ['rt-logo.png','dream.jpg','rtmotors.png','medline.jpg','akataxi.jpg','ic-ship.webp']
 const BAND_KEYS = ['bw1','bw2','bw3','bw4']
 
-const LAND_D = "M132.8 3.7h0M140.0 3.7h0M147.2 3.7h0M197.8 3.7h0M212.2 3.7h0M320.6 3.7h0M327.8 3.7h0M335.0 3.7h0M342.2 3.7h0M349.4 3.7h0M356.7 3.7h0M363.9 3.7h0M371.1 3.7h0M378.3 3.7h0M385.6 3.7h0M392.8 3.7h0M400.0 3.7h0M407.2 3.7h0M623.9 3.7h0M631.1 3.7h0M717.8 3.7h0M725.0 3.7h0M732.2 3.7h0M739.4 3.7h0M746.7 3.7h0M753.9 3.7h0M761.1 3.7h0M768.3 3.7h0M862.2 3.7h0M132.8 13.2h0M154.4 13.2h0M161.7 13.2h0M168.9 13.2h0M176.1 13.2h0M197.8 13.2h0M212.2 13.2h0M226.7 13.2h0M233.9 13.2h0M241.1 13.2h0M248.3 13.2h0M255.6 13.2h0M262.8 13.2h0M270.0 13.2h0M320.6 13.2h0M327.8 13.2h0M335.0 13.2h0M342.2 13.2h0M349.4 13.2h0M356.7 13.2h0M363.9 13.2h0M371.1 13.2h0M378.3 13.2h0M385.6 13.2h0M392.8 13.2h0M400.0 13.2h0M407.2 13.2h0M623.9 13.2h0M660.0 13.2h0M667.2 13.2h0M688.9 13.2h0M696.1 13.2h0M710.6 13.2h0M717.8 13.2h0M725.0 13.2h0M732.2 13.2h0M739.4 13.2h0M746.7 13.2h0M753.9 13.2h0M761.1 13.2h0M768.3 13.2h0M775.6 13.2h0M782.8 13.2h0M790.0 13.2h0M797.2 13.2h0M804.4 13.2h0M811.7 13.2h0M818.9 13.2h0M826.1 13.2h0M840.6 13.2h0M847.8 13.2h0M862.2 13.2h0M869.4 13.2h0M876.7 13.2h0M883.9 13.2h0M891.1 13.2h0M977.8 13.2h0"
-
-const ARCS: [string,string][] = [
-  ["M825.0 137.5 Q744.7 78.5 664.4 123.6","0.00s"],
-  ["M825.0 137.5 Q700.9 -1.6 576.7 70.4","0.18s"],
-  ["M825.0 137.5 Q725.4 80.3 625.8 182.2","0.36s"],
-  ["M825.0 137.5 Q688.9 48.4 552.8 124.7","0.54s"],
-  ["M825.0 137.5 Q662.5 -4.0 500.0 88.0","0.72s"],
-  ["M825.0 137.5 Q516.6 -37.0 208.3 135.7","0.90s"],
-  ["M825.0 137.5 Q795.9 110.1 766.7 216.3","1.08s"],
-]
-const DST: [number,number][] = [[664.4,123.6],[576.7,70.4],[625.8,182.2],[552.8,124.7],[500.0,88.0],[208.3,135.7],[766.7,216.3]]
 
 export default function ClientPage() {
   const { lang, setLang, t } = useLang()
@@ -110,15 +98,6 @@ export default function ClientPage() {
     }, { threshold: 0.2 })
     document.querySelectorAll('.fl').forEach(el => { el.classList.add('pre'); fleetObs.observe(el) })
 
-    // World map route draw-in
-    const routeObs = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) { e.target.classList.add('in'); routeObs.unobserve(e.target) }
-      })
-    }, { threshold: 0.2 })
-    const routeEl = document.getElementById('route')
-    if (routeEl) routeObs.observe(routeEl)
-
     // Wipe observer
     const wipeObs = new IntersectionObserver((entries) => {
       entries.forEach(e => {
@@ -201,55 +180,11 @@ export default function ClientPage() {
     }
     bandRaf = requestAnimationFrame(bandTick)
 
-    // Hero slider
-    const slides = document.querySelectorAll<HTMLElement>('.slide')
-    const rbtns = document.querySelectorAll<HTMLElement>('.rbtn')
+    // Hero — export only (model picker)
     const hxEl = document.getElementById('hx')
-    const giantEl = document.getElementById('giant')
     const exModels = ['Volvo','Hyundai','Doosan']
-    let curSlide = 0, curModel = 0, tickCount = 0
-    const heroDir = [1, 1, 1, -1]
+    let curModel = 0
 
-    function setSlide(s: number) {
-      slides.forEach((sl, i) => {
-        sl.classList.remove('on','out')
-        if (i === s) sl.classList.add('on')
-        else if (i === curSlide) sl.classList.add('out')
-      })
-      rbtns.forEach((b, i) => {
-        b.setAttribute('aria-selected', i === s ? 'true' : 'false')
-      })
-      if (hxEl) {
-        hxEl.className = `hx${s === 0 ? ' on-ex' : ''}`
-      }
-      if (stEl) {
-        stEl.className = `stage s${s}`
-      }
-      // Update giant headline from hero data
-      const gl1 = document.getElementById('gl1')
-      const gl2 = document.getElementById('gl2')
-      const tr = tRef.current
-      const heroSlideData = [
-        [tr('r1'), tr('r1s')],
-        [tr('r2'), tr('r2s')],
-        [tr('r3'), tr('r3s')],
-        [tr('r4'), tr('r4s')],
-      ]
-      if (gl1 && gl2 && heroSlideData[s]) {
-        gl1.textContent = heroSlideData[s][0]
-        gl2.textContent = heroSlideData[s][1]
-        if (giantEl) { giantEl.classList.remove('swap'); void giantEl.offsetWidth; giantEl.classList.add('swap') }
-      }
-      curSlide = s
-      tickCount = 0
-    }
-
-    // Route buttons click
-    rbtns.forEach((b, i) => {
-      b.addEventListener('click', () => setSlide(i))
-    })
-
-    // Model picker
     const mbtns = document.querySelectorAll<HTMLElement>('.mbtn')
     const exImgs = document.querySelectorAll<HTMLElement>('.exm')
     const mbadge = document.getElementById('mbadge')
@@ -264,20 +199,10 @@ export default function ClientPage() {
     }
     mbtns.forEach((b, i) => b.addEventListener('click', () => setModel(i)))
 
-    // Auto advance
+    // Auto cycle models
     const heroTimer = setInterval(() => {
-      if (curSlide === 0) {
-        tickCount++
-        if (tickCount >= 3) {
-          const nextM = (curModel + 1) % 3
-          if (nextM === 0) setSlide(1)
-          else setModel(nextM)
-        }
-      } else {
-        tickCount++
-        if (tickCount >= 2) setSlide((curSlide + 1) % 4)
-      }
-    }, 3000)
+      setModel((curModel + 1) % 3)
+    }, 5000)
 
     // Section title word split reveal
     document.querySelectorAll('.head h2').forEach(h2 => {
@@ -380,94 +305,7 @@ export default function ClientPage() {
       cleanups.push(() => removeEventListener('scroll', heroScroll))
     }
 
-    // Smoke & dust particles
-    const EXH: Record<number, number[][]> = { 0: [], 2: [[78, 4]], 3: [[53, 1], [71, 3]] }
-    const WAKE: Record<number, number[][]> = { 2: [[7, 86], [12, 90]] }
-    const TIRE: Record<number, number[][]> = { 0: [[45, 97], [70, 97], [92, 97]], 3: [[9, 94], [39, 94], [70, 94]] }
-    const emit = (i: number, heavy: boolean) => {
-      const sl = slides[i]; if (!sl) return
-      const vis = sl.querySelector('.vis') as HTMLElement; if (!vis) return
-      const dir = parseFloat(getComputedStyle(sl).getPropertyValue('--dir')) || 1
-      ;(EXH[i] || []).forEach(pt => {
-        const d = document.createElement('i'); d.className = 'smoke' + (heavy ? '' : ' light')
-        d.style.left = pt[0] + '%'; d.style.top = pt[1] + '%'
-        d.style.setProperty('--sx', (dir * (heavy ? 90 + Math.random() * 140 : 20 + Math.random() * 50)) + 'px')
-        d.style.setProperty('--sy', (-(heavy ? 50 : 70) - Math.random() * 90) + 'px')
-        d.style.setProperty('--sc', (heavy ? 4 + Math.random() * 3 : 2.5 + Math.random() * 2.5).toFixed(2))
-        d.style.setProperty('--t', (heavy ? 1.8 : 2.8) + 's')
-        vis.appendChild(d); setTimeout(() => d.remove(), 3000)
-      })
-      ;(WAKE[i] || []).forEach(pt => {
-        if (!heavy && Math.random() < 0.5) return
-        const w = document.createElement('i'); w.className = 'smoke wake'
-        w.style.left = pt[0] + '%'; w.style.top = pt[1] + '%'
-        w.style.setProperty('--sx', (dir * (40 + Math.random() * 80)) + 'px')
-        w.style.setProperty('--sy', (Math.random() * 16 - 4) + 'px')
-        w.style.setProperty('--sc', (2 + Math.random() * 2).toFixed(2))
-        w.style.setProperty('--t', '1.6s')
-        vis.appendChild(w); setTimeout(() => w.remove(), 1800)
-      })
-    }
-    const tireDust = (i: number, strength: number) => {
-      const sl = slides[i]; if (!sl) return
-      const vis = sl.querySelector('.vis') as HTMLElement; if (!vis) return
-      const dir = parseFloat(getComputedStyle(sl).getPropertyValue('--dir')) || 1
-      ;(TIRE[i] || []).forEach(pt => {
-        for (let k = 0; k < strength; k++) {
-          const d = document.createElement('i'); d.className = 'smoke tire'
-          d.style.left = (pt[0] + (Math.random() * 4 - 2)) + '%'; d.style.top = pt[1] + '%'
-          d.style.setProperty('--sx', (dir * (60 + Math.random() * 150)) + 'px')
-          d.style.setProperty('--sy', (-8 - Math.random() * 45) + 'px')
-          d.style.setProperty('--sc', (3 + Math.random() * 3.5).toFixed(2))
-          d.style.setProperty('--t', (1.2 + Math.random() * 0.8).toFixed(2) + 's')
-          vis.appendChild(d); setTimeout(() => d.remove(), 2200)
-        }
-      })
-    }
-    let lastOutSlide: number | null = null
-    let smokeIv: ReturnType<typeof setInterval> | undefined
-    if (!reduce) {
-      smokeIv = setInterval(() => {
-        if (document.hidden) return
-        const r = (hxEl as HTMLElement)?.getBoundingClientRect(); if (!r || r.bottom < 0) return
-        emit(curSlide, false)
-      }, 140)
-    }
-    cleanups.push(() => { if (smokeIv) clearInterval(smokeIv) })
-
-    // Brake dust on slide change
-    const sp = document.getElementById('sparks') as HTMLElement
-    const spawnDust = () => {
-      if (reduce || !sp || curSlide === 1) return
-      sp.innerHTML = ''
-      setTimeout(() => {
-        for (let k = 0; k < 14; k++) {
-          const d = document.createElement('i'); d.className = 'dust'
-          const left = Math.random() < 0.5
-          d.style.left = (left ? 20 + Math.random() * 25 : 55 + Math.random() * 25) + '%'
-          d.style.setProperty('--dx', ((left ? -1 : 1) * (40 + Math.random() * 120)) + 'px')
-          d.style.setProperty('--dy', (-10 - Math.random() * 50) + 'px')
-          d.style.setProperty('--sc', (2 + Math.random() * 3).toFixed(2))
-          d.style.animationDelay = (Math.random() * 0.15) + 's'
-          sp.appendChild(d)
-        }
-      }, 1250)
-    }
-    spawnDust()
-
-    // Hero swipe on mobile
-    let tx: number | null = null, ty: number | null = null
-    const onTouchStart = (e: TouchEvent) => { tx = e.touches[0].clientX; ty = e.touches[0].clientY }
-    const onTouchEnd = (e: TouchEvent) => {
-      if (tx === null) return
-      const dx = e.changedTouches[0].clientX - tx!, dy = e.changedTouches[0].clientY - ty!
-      tx = null
-      if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) setSlide((curSlide + (dx < 0 ? 1 : 3)) % 4)
-    }
-    if (stEl) {
-      stEl.addEventListener('touchstart', onTouchStart, { passive: true })
-      stEl.addEventListener('touchend', onTouchEnd, { passive: true })
-    }
+    // Smoke & dust removed (single export slide, no particles needed)
 
     // Fleet dust on drive-in
     const flDust = (el: HTMLElement) => {
@@ -513,81 +351,6 @@ export default function ClientPage() {
       })
     })
 
-    // World map route cycling
-    let routeCycleIv: ReturnType<typeof setInterval> | undefined
-    if (!reduce) {
-      const routeEl2 = document.getElementById('route')
-      const lits = document.querySelectorAll<HTMLElement>('#route .lit')
-      const labels = document.querySelectorAll<HTMLElement>('#route .city:not(.hubl)')
-      const dsts = document.querySelectorAll<HTMLElement>('#route .dst')
-      const NS = 'http://www.w3.org/2000/svg'
-      const svgEl = routeEl2?.querySelector('svg')
-      const rings: SVGCircleElement[] = []
-      dsts.forEach(d => {
-        const r = document.createElementNS(NS, 'circle') as SVGCircleElement
-        r.setAttribute('class', 'ring')
-        r.setAttribute('cx', d.getAttribute('cx')!)
-        r.setAttribute('cy', d.getAttribute('cy')!)
-        r.setAttribute('r', '6')
-        d.parentNode?.insertBefore(r, d)
-        rings.push(r)
-      })
-      // Comets along arcs
-      lits.forEach((pth, i) => {
-        try {
-          const L = (pth as unknown as SVGPathElement).getTotalLength()
-          const c = document.createElementNS(NS, 'path')
-          c.setAttribute('d', pth.getAttribute('d')!)
-          c.setAttribute('class', 'comet')
-          c.style.setProperty('--lenpx', Math.ceil(L) + 'px')
-          c.style.setProperty('--cd', (2.4 + L / 400).toFixed(2) + 's')
-          c.style.setProperty('--cdl', (i * 0.35) + 's')
-          const mg = document.getElementById('movers')
-          if (svgEl && mg) svgEl.insertBefore(c, mg)
-        } catch { /* path may not support getTotalLength in SSR */ }
-      })
-      // Moving dots along arcs
-      const mvs: { p: SVGPathElement; L: number; c: SVGCircleElement; o: number; sp: number }[] = []
-      lits.forEach((pth, i) => {
-        try {
-          const L = (pth as unknown as SVGPathElement).getTotalLength()
-          const c = document.createElementNS(NS, 'circle') as SVGCircleElement
-          c.setAttribute('r', '5'); c.setAttribute('class', 'mv')
-          document.getElementById('movers')?.appendChild(c)
-          mvs.push({ p: pth as unknown as SVGPathElement, L, c, o: i * 0.37, sp: 3800 + i * 420 })
-        } catch { /* noop */ }
-      })
-      const dt0 = performance.now()
-      let dotRaf: number
-      const moveDots = (now: number) => {
-        mvs.forEach(m => {
-          const f = (((now - dt0) / m.sp) + m.o) % 1
-          try {
-            const pt = m.p.getPointAtLength(f * m.L)
-            m.c.setAttribute('cx', String(pt.x)); m.c.setAttribute('cy', String(pt.y))
-            m.c.setAttribute('opacity', String(f < 0.08 ? f / 0.08 : (f > 0.92 ? (1 - f) / 0.08 : 1)))
-          } catch { /* noop */ }
-        })
-        dotRaf = requestAnimationFrame(moveDots)
-      }
-      dotRaf = requestAnimationFrame(moveDots)
-      cleanups.push(() => cancelAnimationFrame(dotRaf))
-
-      let hi = -1
-      const cycle = () => {
-        const r = routeEl2?.getBoundingClientRect()
-        if (!r || r.bottom < 0 || r.top > innerHeight) return
-        routeEl2?.classList.add('cycling')
-        hi = (hi + 1) % lits.length
-        lits.forEach((l, i) => l.classList.toggle('hot', i === hi))
-        labels.forEach((l, i) => l.classList.toggle('hot', i === hi))
-        const rg = rings[hi]
-        if (rg) { rg.classList.remove('ping'); void rg.getBoundingClientRect(); rg.classList.add('ping') }
-      }
-      setTimeout(() => { cycle(); routeCycleIv = setInterval(cycle, 1600) }, 2400)
-      cleanups.push(() => { if (routeCycleIv) clearInterval(routeCycleIv) })
-    }
-
     // Scroll parallax on photos
     if (!reduce) {
       const pxEls = document.querySelectorAll<HTMLElement>('.about-img img,.cargo-poster img,.news-img img,.ph-img img')
@@ -611,7 +374,6 @@ export default function ClientPage() {
       revealObs.disconnect()
       pillarObs.disconnect()
       fleetObs.disconnect()
-      routeObs.disconnect()
       wipeObs.disconnect()
       counterObs.disconnect()
       cleanups.forEach(fn => fn())
@@ -622,25 +384,9 @@ export default function ClientPage() {
     const gl1 = document.getElementById('gl1')
     const gl2 = document.getElementById('gl2')
     if (gl1 && gl2) {
-      const slides = [
-        [t('r1'), t('r1s')],
-        [t('r2'), t('r2s')],
-        [t('r3'), t('r3s')],
-        [t('r4'), t('r4s')],
-      ]
-      const active = document.querySelector<HTMLElement>('.rbtn[aria-selected="true"]')
-      const s = active ? Number(active.dataset.s) : 0
-      gl1.innerHTML = slides[s]?.[0] ?? ''
-      gl2.textContent = slides[s]?.[1] ?? ''
+      gl1.innerHTML = t('r1')
+      gl2.textContent = t('r1s')
     }
-    document.querySelectorAll<HTMLElement>('.rbtn').forEach(btn => {
-      const rt = btn.querySelector('.rt')
-      const rs = btn.querySelector('.rs')
-      const s = Number(btn.dataset.s)
-      const keys = [['r1','r1s'],['r2','r2s'],['r3','r3s'],['r4','r4s']]
-      if (rt && keys[s]) rt.innerHTML = t(keys[s][0])
-      if (rs && keys[s]) rs.innerHTML = t(keys[s][1])
-    })
   }, [lang, t])
 
   const langs: Lang[] = ['uz','ru','en']
@@ -700,13 +446,10 @@ export default function ClientPage() {
         <div className="wrap menu-in">
           <nav aria-label="Asosiy menyu" className="menu-links">
             <a href="#about" onClick={closeMenu}><small>01</small><span dangerouslySetInnerHTML={{ __html: t('nAbout') }} /></a>
-            <a href="#trade" onClick={closeMenu}><small>02</small><span dangerouslySetInnerHTML={{ __html: t('trTitle') }} /></a>
-            <a href="#companies" onClick={closeMenu}><small>03</small><span dangerouslySetInnerHTML={{ __html: t('nCos') }} /></a>
-            <a href="#cargo" onClick={closeMenu}><small>04</small><span dangerouslySetInnerHTML={{ __html: t('nCargo') }} /></a>
-            <a href="#aka" onClick={closeMenu}><small>05</small><span dangerouslySetInnerHTML={{ __html: t('nAka') }} /></a>
-            <a href="#news" onClick={closeMenu}><small>06</small><span dangerouslySetInnerHTML={{ __html: t('nNews') }} /></a>
-            <a href="#process" onClick={closeMenu}><small>07</small><span dangerouslySetInnerHTML={{ __html: t('pTag') }} /></a>
-            <a href="#contact" onClick={closeMenu}><small>08</small><span dangerouslySetInnerHTML={{ __html: t('nContact') }} /></a>
+            <a href="#companies" onClick={closeMenu}><small>02</small><span dangerouslySetInnerHTML={{ __html: t('nCos') }} /></a>
+            <a href="#news" onClick={closeMenu}><small>03</small><span dangerouslySetInnerHTML={{ __html: t('nNews') }} /></a>
+            <a href="#process" onClick={closeMenu}><small>04</small><span dangerouslySetInnerHTML={{ __html: t('pTag') }} /></a>
+            <a href="#contact" onClick={closeMenu}><small>05</small><span dangerouslySetInnerHTML={{ __html: t('nContact') }} /></a>
           </nav>
           <p className="menu-tag">Your choice is important 4 us</p>
         </div>
@@ -726,21 +469,6 @@ export default function ClientPage() {
             </h1>
 
             <div className="routes" id="routes">
-              <h2 dangerouslySetInnerHTML={{ __html: t('kRoutes') }} />
-              <div className="rlist" role="tablist" aria-label="Yo'nalishlar">
-                {[
-                  { s: '0', rt: 'r1', rs: 'r1s' },
-                  { s: '1', rt: 'r2', rs: 'r2s' },
-                  { s: '2', rt: 'r3', rs: 'r3s' },
-                  { s: '3', rt: 'r4', rs: 'r4s' },
-                ].map((r, i) => (
-                  <button key={r.s} type="button" role="tab" className="rbtn" aria-selected={i === 0} data-s={r.s}>
-                    <span className="rt" dangerouslySetInnerHTML={{ __html: t(r.rt) }} />
-                    <span className="rs" dangerouslySetInnerHTML={{ __html: t(r.rs) }} />
-                    <i aria-hidden="true" />
-                  </button>
-                ))}
-              </div>
               <div className="models" id="models">
                 <span className="mtitle" dangerouslySetInnerHTML={{ __html: t('mdl') }} />
                 <div className="mlist" role="group" aria-label="Ekskavator modellari">
@@ -763,25 +491,6 @@ export default function ClientPage() {
                   <span className="mbadge" id="mbadge" aria-live="polite"><b>VOLVO</b></span>
                 </div>
               </div>
-              <div className="slide" data-s="1" style={{ ['--dir' as string]: 1 }}>
-                <div className="vis vis-tank vis-oils">
-                  <img className="kortex-logo-hero" src="/img/companies/kortex-oil-logo.png" alt="Kortex Oil" width={200} height={120} />
-                  <img className="oils-hero" src="/img/kortex-oils-hero.png" alt="Kortex Oil products" width={1073} height={410} />
-                </div>
-              </div>
-              <div className="slide" data-s="2" style={{ ['--dir' as string]: 1 }}>
-                <div className="vis vis-ship">
-                  <span className="shadow" aria-hidden="true" />
-                  <span className="mbadge kbadge"><b>RT</b> LOGISTICS</span>
-                  <img src="/img/ship.webp" alt="Yuk kemasi" width={1088} height={550} />
-                </div>
-              </div>
-              <div className="slide" data-s="3" style={{ ['--dir' as string]: -1 }}>
-                <div className="vis vis-truck">
-                  <span className="shadow" aria-hidden="true" />
-                  <img src="/img/truck-hero.webp" alt="Koreya bayrog'i tushirilgan yuk mashinasi" width={1059} height={531} />
-                </div>
-              </div>
             </div>
 
             <div className="hx-copy">
@@ -792,7 +501,7 @@ export default function ClientPage() {
               </p>
               <p className="hx-lead" dangerouslySetInnerHTML={{ __html: t('hLead') }} />
               <div className="hx-cta">
-                <a className="btn btn-navy" href="#trade"><span dangerouslySetInnerHTML={{ __html: t('hBtn3') }} /><span className="dot" aria-hidden="true">{ARROW}</span></a>
+                <a className="btn btn-navy" href="#fleet"><span dangerouslySetInnerHTML={{ __html: t('hBtn3') }} /><span className="dot" aria-hidden="true">{ARROW}</span></a>
                 <a className="txtlink" href="#companies" dangerouslySetInnerHTML={{ __html: t('hBtn') }} />
               </div>
             </div>
@@ -825,56 +534,11 @@ export default function ClientPage() {
               <div className="about-txt">
                 <p className="big rv" dangerouslySetInnerHTML={{ __html: t('aBig') }} />
                 <p className="body rv" dangerouslySetInnerHTML={{ __html: t('aBody') }} />
-                <div className="pillars">
-                  <div className="pillar rv">
-                    <div className="ic ic-sea"><span className="waves" aria-hidden="true" /><img className="pl-ship" src="/img/ic-ship.webp" alt="" loading="lazy" /></div>
-                    <h3 dangerouslySetInnerHTML={{ __html: t('p1t') }} /><p dangerouslySetInnerHTML={{ __html: t('p1') }} />
-                  </div>
-                  <div className="pillar rv" style={{ ['--d' as string]: '.12s' }}>
-                    <div className="ic ic-road"><span className="road2" aria-hidden="true" /><img className="pl-truck" src="/img/ic-tanker.webp" alt="" loading="lazy" /></div>
-                    <h3 dangerouslySetInnerHTML={{ __html: t('p3t') }} /><p dangerouslySetInnerHTML={{ __html: t('p3') }} />
-                  </div>
-                  <div className="pillar rv" style={{ ['--d' as string]: '.24s' }}>
-                    <div className="ic ic-road"><span className="road2" aria-hidden="true" /><img className="pl-ex" src="/img/ic-excavator.webp" alt="" loading="lazy" /></div>
-                    <h3 dangerouslySetInnerHTML={{ __html: t('p4t') }} /><p dangerouslySetInnerHTML={{ __html: t('p4') }} />
-                  </div>
-                </div>
               </div>
               <div className="about-img rv wipe">
                 <img src="/img/companies/rt-logistcs-6.jpg" alt="RT Holdings" width={900} height={1200} loading="lazy" />
                 <span className="badge" dangerouslySetInnerHTML={{ __html: t('aBadge') }} />
               </div>
-            </div>
-          </div>
-        </section>
-
-        {/* TRADE */}
-        <section className="sec" id="trade" style={{ paddingTop: 0 }}>
-          <div className="wrap">
-            <div className="head">
-              <div><span className="tag" dangerouslySetInnerHTML={{ __html: t('trTag') }} /><h2 className="rv" dangerouslySetInnerHTML={{ __html: t('trTitle') }} /></div>
-            </div>
-            <div className="trade">
-              <article className="tcard rv">
-                <div className="tvis"><img src="/img/ex-volvo.webp" alt="Volvo ekskavator" width={826} height={548} loading="lazy" /></div>
-                <div className="tbody">
-                  <span className="cat" dangerouslySetInnerHTML={{ __html: t('r1') }} />
-                  <h3 dangerouslySetInnerHTML={{ __html: t('trExH') }} />
-                  <p dangerouslySetInnerHTML={{ __html: t('trExP') }} />
-                  <p className="ph" dangerouslySetInnerHTML={{ __html: t('trExPh') }} />
-                </div>
-              </article>
-              <article className="tcard rv" style={{ ['--d' as string]: '.1s' }}>
-                <div className="tvis photo wipe">
-                  <img src="/img/companies/kortex-products.jpg" alt="Kortex Oil" width={1376} height={768} loading="lazy" />
-                </div>
-                <div className="tbody">
-                  <span className="cat" dangerouslySetInnerHTML={{ __html: t('r2') }} />
-                  <h3 dangerouslySetInnerHTML={{ __html: t('trImH') }} />
-                  <p dangerouslySetInnerHTML={{ __html: t('trImP') }} />
-                  <div className="links2"><a href="https://www.instagram.com/kortex_oil/">{IG}Instagram &middot; @kortex_oil</a></div>
-                </div>
-              </article>
             </div>
           </div>
         </section>
@@ -1143,105 +807,6 @@ export default function ClientPage() {
           </div>
         )}
 
-        {/* CARGO */}
-        <section className="sec navy ribbed" id="cargo">
-          <div className="wrap">
-            <div className="head">
-              <div><span className="tag" dangerouslySetInnerHTML={{ __html: t('kTag') }} /><h2 className="rv" dangerouslySetInnerHTML={{ __html: t('kTitle') }} /></div>
-              {t('kText') && <p className="rv" dangerouslySetInnerHTML={{ __html: t('kText') }} />}
-            </div>
-            <div className="cargo-grid">
-              <div className="cargo-poster rv wipe">
-                <img src="/img/companies/rt-logistics.jpg" alt="RT Logistics" width={1000} height={1000} loading="lazy" />
-                <span className="shine" aria-hidden="true" />
-                <div className="fchip fc1"><b><span className="count" data-to="186">186</span>+</b><span dangerouslySetInnerHTML={{ __html: t('n2') }} /></div>
-                <div className="fchip fc2"><b><span className="count" data-to="1000">1000</span>+</b><span dangerouslySetInnerHTML={{ __html: t('n4') }} /></div>
-              </div>
-              <div className="cargo-side">
-                <div className="ph-img rv wipe"><img src="/img/companies/rt-logistics-2.jpg" alt="RT Logistics" width={900} height={1200} loading="lazy" /><span dangerouslySetInnerHTML={{ __html: t('k1') }} /></div>
-                <div className="ph-img rv wipe" style={{ ['--d' as string]: '.1s' }}><img src="/img/companies/rt-logistics-3.jpg" alt="RT Logistics" width={900} height={1200} loading="lazy" /><span dangerouslySetInnerHTML={{ __html: t('k2') }} /></div>
-              </div>
-              {/* WORLD MAP */}
-              <div className="route rv" id="route">
-                <svg viewBox="0 0 1000 440" role="img" aria-label="Koreyadan dunyo bo'ylab yo'nalishlar xaritasi">
-                  <path className="land" d={LAND_D} />
-                  {ARCS.map(([d, dl], i) => (
-                    <g key={i}>
-                      <path className="arc" d={d} />
-                      <path className="lit" style={{ ['--dl' as string]: dl }} d={d} />
-                    </g>
-                  ))}
-                  <g id="movers" />
-                  {DST.map(([cx, cy], i) => <circle key={i} className="dst" cx={cx} cy={cy} r="5" />)}
-                  <circle className="pulse" cx="825.0" cy="137.5" r="9" />
-                  <circle className="hub" cx="825.0" cy="137.5" r="9" />
-                  <text className="city hubl" x="841.0" y="142.5" dangerouslySetInnerHTML={{ __html: t('kr') }} />
-                  <text className="city" x="664.4" y="147.6" textAnchor="middle" dangerouslySetInnerHTML={{ __html: t('w1') }} />
-                  <text className="city" x="576.7" y="56.4" textAnchor="middle" dangerouslySetInnerHTML={{ __html: t('w2') }} />
-                  <text className="city" x="625.8" y="206.2" textAnchor="middle" dangerouslySetInnerHTML={{ __html: t('w3') }} />
-                  <text className="city" x="542.8" y="144.7" textAnchor="end" dangerouslySetInnerHTML={{ __html: t('w4') }} />
-                  <text className="city" x="488.0" y="80.0" textAnchor="end" dangerouslySetInnerHTML={{ __html: t('w5') }} />
-                  <text className="city" x="208.3" y="159.7" textAnchor="middle" dangerouslySetInnerHTML={{ __html: t('w6') }} />
-                  <text className="city" x="766.7" y="242.3" textAnchor="middle" dangerouslySetInnerHTML={{ __html: t('w7') }} />
-                  <text className="sub" x="990" y="430" textAnchor="end" dangerouslySetInnerHTML={{ __html: t('kMid') }} />
-                </svg>
-              </div>
-              {/* STEPS */}
-              <div className="steps">
-                {[1,2,3,4].map(n => (
-                  <div key={n} className="step rv" style={n > 1 ? { ['--d' as string]: `${(n-1)*0.08}s` } : undefined}>
-                    <span className="n">{String(n).padStart(2,'0')}</span>
-                    <h3 dangerouslySetInnerHTML={{ __html: t(`s${n}t`) }} />
-                    <p dangerouslySetInnerHTML={{ __html: t(`s${n}`) }} />
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="partner">
-              <b>RT Logistics</b>
-              <a href="https://www.instagram.com/rt_logistics/">{IG}Instagram &middot; @rt_logistics</a>
-            </div>
-          </div>
-        </section>
-
-        {/* AKA */}
-        <section className="sec" id="aka">
-          <div className="wrap aka">
-            <div className="aka-intro">
-              <span className="tag" dangerouslySetInnerHTML={{ __html: t('tTag') }} />
-              <h2 className="rv" dangerouslySetInnerHTML={{ __html: t('tTitle') }} />
-              <img className="pair rv" src="/img/companies/aka-taxi-1.jpg" alt="aka taxi" width={600} height={400} loading="lazy" style={{ borderRadius: 20, width: '100%', maxWidth: 420, objectFit: 'cover' }} />
-              <p style={{ color: 'var(--muted)' }} dangerouslySetInnerHTML={{ __html: t('tText') }} />
-              <div className="links2" style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-                <a className="btn btn-navy" href="https://www.instagram.com/akataxi.uz/"><span>Instagram</span><span className="dot" aria-hidden="true">{ARROW}</span></a>
-                <a className="btn btn-orange" href="https://t.me/akataxi"><span>Telegram</span><span className="dot" aria-hidden="true">{ARROW}</span></a>
-              </div>
-            </div>
-            <div className="aka-apps">
-              <article className="app t rv">
-                <span className="ring" aria-hidden="true" />
-                <div className="q" dangerouslySetInnerHTML={{ __html: t('atQ') }} />
-                <p dangerouslySetInnerHTML={{ __html: t('atP') }} />
-                <ul>
-                  <li dangerouslySetInnerHTML={{ __html: t('at1') }} />
-                  <li dangerouslySetInnerHTML={{ __html: t('at2') }} />
-                  <li dangerouslySetInnerHTML={{ __html: t('at3') }} />
-                </ul>
-              </article>
-              <article className="app d rv" style={{ ['--d' as string]: '.1s' }}>
-                <span className="ring" aria-hidden="true" />
-                <div className="q" dangerouslySetInnerHTML={{ __html: t('adQ') }} />
-                <p dangerouslySetInnerHTML={{ __html: t('adP') }} />
-                <ul>
-                  <li dangerouslySetInnerHTML={{ __html: t('ad1') }} />
-                  <li dangerouslySetInnerHTML={{ __html: t('ad2') }} />
-                  <li dangerouslySetInnerHTML={{ __html: t('ad3') }} />
-                </ul>
-              </article>
-            </div>
-          </div>
-        </section>
-
         {/* NEWS */}
         <section className="sec" id="news" style={{ paddingTop: 0 }}>
           <div className="wrap">
@@ -1336,7 +901,7 @@ export default function ClientPage() {
         <div className="wrap foot-top">
           <div className="brand"><img src="/img/rt-logo.png" alt="RT Holdings" width={720} height={296} loading="lazy" /></div>
           <div className="fcols">
-            <div className="fcol"><h4 dangerouslySetInnerHTML={{ __html: t('nCos') }} /><a href="#trade">Kortex Oil</a><a href="#cargo">Dream Express</a><a href="#companies">RT Motors</a><a href="#companies">RT Medline</a><a href="#aka">aka taxi</a></div>
+            <div className="fcol"><h4 dangerouslySetInnerHTML={{ __html: t('nCos') }} /><a href="#companies">Kortex Oil</a><a href="#companies">Dream Express</a><a href="#companies">RT Motors</a><a href="#companies">RT Medline</a><a href="#companies">aka taxi</a></div>
             <div className="fcol"><h4 dangerouslySetInnerHTML={{ __html: t('ftNav') }} /><a href="#about" dangerouslySetInnerHTML={{ __html: t('nAbout') }} /><a href="#news" dangerouslySetInnerHTML={{ __html: t('nNews') }} /><a href="#contact" dangerouslySetInnerHTML={{ __html: t('nContact') }} /></div>
             <div className="fcol"><h4 dangerouslySetInnerHTML={{ __html: t('ftSoc') }} /><a href="https://www.instagram.com/kortex_oil/">@kortex_oil</a><a href="https://www.instagram.com/expressbts_kr/">@expressbts_kr</a><a href="https://www.instagram.com/rtmotors_trade/">@rtmotors_trade</a><a href="https://www.instagram.com/rt_medline/">@rt_medline</a><a href="https://www.instagram.com/akataxi.uz/">@akataxi.uz</a><a href="https://t.me/akataxi">Telegram &middot; akataxi</a></div>
           </div>
