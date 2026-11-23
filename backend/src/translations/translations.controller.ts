@@ -1,9 +1,12 @@
 import { Body, Controller, Delete, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import { TranslationsService } from './translations.service';
 import { UpsertTranslationDto } from './dto/upsert-translation.dto';
 import { BulkUpsertDto } from './dto/bulk-upsert.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 
+@ApiTags('Translations')
+@ApiBearerAuth()
 @Controller('translations')
 export class TranslationsController {
   constructor(private translationsService: TranslationsService) {}

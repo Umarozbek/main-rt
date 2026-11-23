@@ -1,8 +1,11 @@
 import { Body, Controller, Delete, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import { SettingsService } from './settings.service';
 import { UpsertSettingDto } from './dto/upsert-setting.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 
+@ApiTags('Settings')
+@ApiBearerAuth()
 @Controller('settings')
 export class SettingsController {
   constructor(private settingsService: SettingsService) {}

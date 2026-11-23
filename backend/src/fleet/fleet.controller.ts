@@ -1,9 +1,12 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
+import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import { FleetService } from './fleet.service';
 import { CreateFleetItemDto } from './dto/create-fleet-item.dto';
 import { UpdateFleetItemDto } from './dto/update-fleet-item.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 
+@ApiTags('Fleet')
+@ApiBearerAuth()
 @Controller('fleet')
 export class FleetController {
   constructor(private fleetService: FleetService) {}
